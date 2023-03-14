@@ -27,9 +27,9 @@ public class UserService {
 	
 	public Boolean addUser(User newUser) {
 		
-		Optional<User> user = Optional.of( userRepository.findByName(newUser.getName()));
+		Optional<User> user = Optional.ofNullable( userRepository.findByName(newUser.getName()));
 		
-		if(user.isEmpty()) throw new UserAlreadyAvailableException("User Already Available");
+		if(user.isPresent()) throw new UserAlreadyAvailableException("User Already Available");
 		
 		userRepository.save(newUser);		
 		return true;

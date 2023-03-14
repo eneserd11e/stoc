@@ -62,11 +62,16 @@ public class AuthController {
 	
 	@PostMapping("/register")
 	public ResponseEntity<AuthResponse> resgister(@RequestBody RegisterRequest registerRequest){
+		System.out.println(registerRequest.getConfirmPassword());
+		System.out.println(registerRequest.getPassword());
 		AuthResponse authResponse = new AuthResponse();
-		if(userService.getOneUserByName(registerRequest.getName())!=null) {
-			authResponse.setMessage("username already in use");
-			return new ResponseEntity<>(authResponse,HttpStatus.BAD_REQUEST);  
+		if(registerRequest.getPassword().equals(registerRequest.getConfirmPassword()) == false) {
+			authResponse.setStatus(false);
+			authResponse.setMessage("not equal password");
+			return new ResponseEntity<>(authResponse,HttpStatus.BAD_REQUEST); 
 		}
+		
+		
 		User user = new User();
 		user.setName(registerRequest.getName());
 		user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));

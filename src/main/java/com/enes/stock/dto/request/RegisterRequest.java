@@ -9,13 +9,17 @@ public class RegisterRequest {
 
 	private String name;
 	private String password;
+	private String confirmPassword;
+	
 	
 	public RegisterRequest() {}
 
-	public RegisterRequest(String name, String password) {
+	public RegisterRequest(String name, String password,String confirmPassword) {
 		super();
 		this.name = name;
 		this.password = password;
+		this.confirmPassword = confirmPassword;
+		
 	}
 
 	public String getName() {
@@ -33,4 +37,14 @@ public class RegisterRequest {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
+	
 }
